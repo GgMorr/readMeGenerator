@@ -91,7 +91,8 @@ inquirer
         type: 'list',
         name: 'license',
         message: 'Select your choice of license:',
-        choices: ['MIT license', 'Apache license', 'GPL license', 'Other'],
+        choices: ['MIT ', 'Apache license', 'GPL license', 'Other'],
+           
         validate: licenseInput => {
             if (licenseInput) {
                 return true;
@@ -102,7 +103,7 @@ inquirer
       }
   ])
   
- 
+
 .then(({title, description, installation, use, contribution, user, email, about}) => {
     const template = `# ${title}
 * [Description](#description)
@@ -132,6 +133,8 @@ ${about}\n
     createNewFile(title,template);
     } 
 );
+
+
 
     function createNewFile(README,data) {
         //fs.writeFile(`./${README.toLowerCase().split('').join('')}.md`,data,(err)=> {
