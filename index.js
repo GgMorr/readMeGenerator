@@ -3,7 +3,6 @@ const fs = require('fs');
 const util = require('util');
 
 
-
 inquirer
   .prompt([
     {
@@ -101,12 +100,9 @@ inquirer
             }
         }
       }
-
-
   ])
   
-
-   
+ 
 .then(({title, description, installation, use, contribution, user, email, about}) => {
     const template = `# ${title}
 * [Description](#description)
@@ -116,7 +112,9 @@ inquirer
 * [GitHub User Name](#user)
 * [About](#about)
 * [Email] (#email)\n
-# DESCRIPTION
+
+#Table of Contents
+## DESCRIPTION
 ${description}\n
 ## INSTALLATION
 ${installation}\n
@@ -124,12 +122,11 @@ ${installation}\n
 ${use}\n
 ## CONTRIBUTION
 ${contribution}\n
-### GigHub User Name
+## GitHub User Name
 ${user}\n
 ## ABOUT
 ${about}\n
-
-#CONTACT
+## CONTACT
 * Email: ${email}`;
 
     createNewFile(title,template);
@@ -138,7 +135,7 @@ ${about}\n
 
     function createNewFile(README,data) {
         //fs.writeFile(`./${README.toLowerCase().split('').join('')}.md`,data,(err)=> {
-        fs.writeFile("readme.md",data,(err)=> {    
+        fs.writeFile("README.md",data,(err)=> {    
         if(err){
                 console.log(err)
             }
@@ -148,12 +145,3 @@ ${about}\n
 }
 
 
-// ////////////////////////////////////////////////
-
-// const inquirer = require('inquirer');
-// const fs = require('fs');
-// const util = require('util');
-
-// const generateMarkdown = require('./util/generateMarkdown')
-
-// const tempQuestions
