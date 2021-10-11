@@ -27,23 +27,37 @@ inquirer
       },
 
       {
-        type: 'input',
-        name: 'installation',
-        message: 'How to install your project? (Required)',
-        validate: (value) => {
-            if (value) {
-                {return true}
-             } else {return 'Please explain how to install your project!'}},
+        type: 'list',
+        name: 'license',
+        message: 'Select your choice of license:',
+        choices: ['MIT', 'Apache 2.0', 'GPLv3'],  
+        validate: licenseInput => {
+            if (licenseInput) {
+                return true;
+            } else {console.log('Please provide your license provider!');
+                return false;
+            }
+        }
       },
 
       {
         type: 'input',
-        name: 'use',
-        message: 'How to use your project?',
+        name: 'installation',
+        message: 'How to install your application? (Required)',
         validate: (value) => {
             if (value) {
                 {return true}
-             } else {return 'Please explain how to use your project!'}},
+             } else {return 'Please explain how to install your application!'}},
+      },
+
+      {
+        type: 'input',
+        name: 'usage',
+        message: 'How to use your application?',
+        validate: (value) => {
+            if (value) {
+                {return true}
+             } else {return 'Please explain how to use your application!'}},
       },
 
       {
@@ -61,18 +75,9 @@ inquirer
       {
         type: 'input',
         name: 'questions',
-        message: 'Enter a GitHub user name?'
+        message: 'Enter your GitHub user name?'
       },
 
-      {
-        type: 'input',
-        name: 'email',
-        message: 'What is your email address?',
-        validate: (value) => {
-            if (value) {
-                {return true}
-             } else {return 'Please enter your email address!'}},
-      },
 
       {
         type: 'confirm',
@@ -93,23 +98,21 @@ inquirer
           }
         }
       },
-      {
-        type: 'list',
-        name: 'license',
-        message: 'Select your choice of license:',
-        choices: ['MIT', 'Apache 2.0', 'GPLv3'],  
-        validate: licenseInput => {
-            if (licenseInput) {
-                return true;
-            } else {console.log('Please provide your license provider!');
-                return false;
-            }
+
+        {
+          type: 'input',
+          name: 'email',
+          message: 'What is your email address?',
+          validate: (value) => {
+              if (value) {
+                  {return true}
+               } else {return 'Please enter your email address!'}},
         }
-      }
+     
   ])
   
 
-.then(({title, description, installation, use, license, badge, contributers, test, userName, email, about}) => {
+.then(({title, description, installation, usage, license, badge, contributers, testing, questions, email, about}) => {
 
   switch (license) {
     case "MIT": 
@@ -127,16 +130,16 @@ inquirer
 
     const template = `# ${title}
 
-##Table of Contents
+## Table of Contents
 * [Description](#description)
 * [License](#license)
 * [Installation](#installation)
-* [Use](#use)
+* [Usage](#usage)
 * [Contributers](#contributers)
-* [Testing](#test)
-* [Questions](#userName)
+* [Testing](#testing)
+* [Questions](#questions)
 * [About](#about)
-* [Email] (#email)\n
+* [Email](#email)\n
  
 
 ## DESCRIPTION
@@ -145,14 +148,14 @@ ${description}\n
 This project is licensed under ${badge}\n
 ## INSTALLATION
 ${installation}\n
-## USE
-${use}\n
+## USAGE
+${usage}\n
 ## CONTRIBUTERS
 Contributers ${contributers}\n
 ## TESTING
-The following actions are required to run the test: ${test}\n
+The following actions are required to run the test: ${testing}\n
 ## QUESTIONS
-For questions about this application, please email at https://github.com/${userName}\n
+For questions about this application, please email at https://github.com/${questions}\n
 ## ABOUT
 ${about}\n
 ### EMAIL
