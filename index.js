@@ -151,7 +151,7 @@ ${installation}\n
 ## USAGE
 ${usage}\n
 ## CONTRIBUTERS
-Contributers ${contributers}\n
+${contributers}\n
 ## TESTING
 The following actions are required to run the test: ${testing}\n
 ## QUESTIONS
