@@ -48,14 +48,20 @@ inquirer
 
       {
         type: 'input',
-        name: 'contribute',
+        name: 'contributers',
         message: 'How can others contribute to your project?'
       },
 
       {
         type: 'input',
-        name: 'user',
-        message: 'What is your GitHub user name?'
+        name: 'testing',
+        message: 'How do you test your application?'
+      },
+
+      {
+        type: 'input',
+        name: 'questions',
+        message: 'Enter a GitHub user name?'
       },
 
       {
@@ -91,7 +97,7 @@ inquirer
         type: 'list',
         name: 'license',
         message: 'Select your choice of license:',
-        choices: ['MIT license', 'Apache license', 'GPLv3 license'],  
+        choices: ['MIT', 'Apache 2.0', 'GPLv3'],  
         validate: licenseInput => {
             if (licenseInput) {
                 return true;
@@ -103,7 +109,7 @@ inquirer
   ])
   
 
-.then(({title, description, installation, use, license, contribution, user, email, about}) => {
+.then(({title, description, installation, use, license, badge, contributers, test, userName, email, about}) => {
 
   switch (license) {
     case "MIT": 
@@ -112,42 +118,46 @@ inquirer
 
     case "Apache 2.0": 
           badge = '[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)';
-    
-          case "GPL v3": 
+      break;
+
+    case "GPLv3": 
           badge = '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)';
-          
-    default:
       break;
   };
 
     const template = `# ${title}
 
-#Table of Contents
+##Table of Contents
 * [Description](#description)
+* [License](#license)
 * [Installation](#installation)
 * [Use](#use)
-* [License](#license)
-* [Contribution](#contribution)
-* [GitHub User Name](#user)
+* [Contributers](#contributers)
+* [Testing](#test)
+* [Questions](#userName)
 * [About](#about)
 * [Email] (#email)\n
+ 
 
 ## DESCRIPTION
 ${description}\n
+## LICENSE
+This project is licensed under ${badge}\n
 ## INSTALLATION
 ${installation}\n
 ## USE
 ${use}\n
-## LICENSE
-${license}\n
-## CONTRIBUTION
-${contribution}\n
-## GITHUB USER NAME
-${user}\n
+## CONTRIBUTERS
+Contributers ${contributers}\n
+## TESTING
+The following actions are required to run the test: ${test}\n
+## QUESTIONS
+For questions about this application, please email at https://github.com/${userName}\n
 ## ABOUT
 ${about}\n
 ### EMAIL
 ${email}`;
+
 
     createNewFile(title,template);
     } 
@@ -161,7 +171,7 @@ ${email}`;
         if(err){
                 console.log(err)
             }
-            console.log('Congratulations! Your ReadMe has been generator')
+            console.log('Congratulations! Your ReadMe has been generated')
         })
 
 }
